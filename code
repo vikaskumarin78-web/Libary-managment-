@@ -1,0 +1,94 @@
+public class Library {
+
+    Book[] books;
+
+    public Library() {
+        books = new Book[5];
+
+        books[0] = new Book(1, "Java basic", "VIKAS");
+        books[1] = new Book(2, "Python basic", "TANU");
+        books[2] = new Book(3, "Ruby basic", "SAKSHI");
+        books[3] = new Book(4, "C++ basic", "BABY");
+        books[4] = new Book(5, "Java Script basic", "KAV");
+    }
+
+    public void showAllBooks() {
+        for (int i = 0; i < books.length; i++) {
+            books[i].displayBook();
+        }
+    }
+
+    public void issueBook(int id) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].bookId == id) {
+                books[i].issueBook();
+                return;
+            }
+        }
+
+        System.out.println("Book not found");
+    }
+
+    public void returnBook(int id) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].bookId == id) {
+                books[i].returnBook();
+                return;
+            }
+        }
+
+        System.out.println("Book not found");
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Library library = new Library();
+
+        while (true) {
+
+            System.out.println("\n===== LIBRARY SYSTEM =====");
+            System.out.println("1. Show All Books");
+            System.out.println("2. Issue Book");
+            System.out.println("3. Return Book");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    library.showAllBooks();
+                    break;
+
+                case 2:
+                    System.out.print("Enter Book ID to issue: ");
+                    int issueId = sc.nextInt();
+                    library.issueBook(issueId);
+                    break;
+
+                case 3:
+                    System.out.print("Enter Book ID to return: ");
+                    int returnId = sc.nextInt();
+                    library.returnBook(returnId);
+                    break;
+
+                case 4:
+                    System.out.println("Thank you for using the Library System.");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
